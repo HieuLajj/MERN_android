@@ -42,6 +42,8 @@ import NoteDetails from './src/view/NoteDetails';
 import AddScreen from './src/view/AddScreen';
 import TodoScreen from './src/view/TodoScreen';
 import NoteScreen from './src/view/NoteScreen';
+import GlobalScreen from './src/view/GlobalScreen';
+import GlobalButton from './src/components/GlobalButton';
 import AddButton from './src/components/AddButton';
 import HomeButton from './src/components/HomeButton';
 import TodoButton from './src/components/TodoButton';
@@ -75,6 +77,11 @@ function MyTabs() {
       <Tab.Screen name="Todo" component={TodoScreen} options={{
          tabBarShowLabel: false,
          tabBarIcon:({focused}) => <TodoButton focused={focused}/>,
+      }}/>
+
+      <Tab.Screen name="Global" component={GlobalScreen} options={{
+         tabBarShowLabel: false,
+         tabBarIcon:({focused}) => <GlobalButton focused={focused}/>,
       }}/>
 
       <Tab.Screen name="Add" component={NoteScreen}   options={{

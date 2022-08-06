@@ -35,7 +35,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { findFocusedRoute } from '@react-navigation/native';
-
+import {searchUser} from "../api/api_user"
 const {Value,timing} = Animated
 
 const width = Dimensions.get('window').width
@@ -49,7 +49,8 @@ class FbSearchBar extends React.Component{
         //state
         this.state = {
             isFocused: false,
-            keyword: ''
+            keyword: '',
+            data:[],
         }
 
         this._input_box_translate_x = new Value(width)
@@ -127,6 +128,7 @@ class FbSearchBar extends React.Component{
                                     <Image source={require('../images/image_select/community.png')}
                                            style={{width:152, height:30}} 
                                     />
+                                    {/* <Text>{this.props.statement.token}</Text> */}
                                 </View>
                                 <TouchableHighlight
                                    activeOpacity={1}
@@ -156,7 +158,11 @@ class FbSearchBar extends React.Component{
                                         clearButtonMode='always'
                                         value={this.state.keyword}
                                         onChangeText={(value)=>{this.setState({keyword: value})
-                                        console.log(this.state.keyword);
+                                       // console.log(this.state.keyword);
+                                        searchUser(this.props.statement.token,this.state.keyword).then((data)=>{
+                                            this.setState({data: data})
+                                            console.log(data)
+                                        })
                                     }}
                                         style={styles.input}
                                     />
@@ -193,33 +199,58 @@ class FbSearchBar extends React.Component{
                                     </View>
                                     
                                 :
-                                    <ScrollView>
-                                        <View style={styles.search_item}>
-                                            <FontAwesome name='search-plus' size={16} color="#cccccc" style={styles.item_icon}></FontAwesome>
-                                            <Text>
-                                                Fake ressult 1
-                                            </Text>
-                                        </View>
-                                        <View style={styles.search_item}>
-                                            <FontAwesome name='search-plus' size={16} color="#cccccc" ></FontAwesome>
-                                            <Text>
-                                                Fake ressult 2
-                                            </Text>
-                                        </View>
-                                        <View style={styles.search_item}>
-                                            <FontAwesome name='search-plus' size={16} color="#cccccc" ></FontAwesome>
-                                            <Text>
-                                                Fake ressult 3
-                                            </Text>
-                                        </View>
-                                        <View style={styles.search_item}>
-                                            <FontAwesome name='search-plus' size={16} color="#cccccc" ></FontAwesome>
-                                            <Text>
-                                                Fake ressult 4
-                                            </Text>
-                                        </View>
-
-                                    </ScrollView>
+                                    
+                                    <View  style={styles.searchitemui}>
+                                        {/* <Text style={{marginTop:100}}>oto</Text> */}
+                                        <Image source={require('../images/nen73.png')}
+                                            style={StyleSheet.absoluteFillObject}
+                                            blurRadius = {80}
+                                        />
+                                        
+                                        <FlatList
+                                            data={this.state.data}
+                                            contentContainerStyle ={{
+                                                padding:20,
+                                                paddingTop: StatusBar.currentHeight || 42
+                                            }}
+                                            renderItem={({ item,index }) => (
+                                                // <Text>{item.name}</Text>
+                                                <View style={{flexDirection:'row', padding:20, marginBottom:20, borderRadius:12, backgroundColor:'rgba(236, 240, 241,0.8)',
+                                                                shadowColor: "#000",
+                                                                shadowOffset: {
+                                                                    width: 0,
+                                                                    height:10
+                                                                },
+                                                                shadowOpacity: 0.3,
+                                                                shadowRadius:20,
+                                                }}>
+                                                { item.avatar!=null ?
+                                                <Image source={{uri:  item.avatar}}
+                                                       style={{
+                                                        width: 70,
+                                                        height: 70,
+                                                        borderRadius: 70,
+                                                        marginRight: 10,
+                                                       }}
+                                                />:
+                                                <Image source={require('../images/koanhdaidien.png')}
+                                                       style={{
+                                                        width: 70,
+                                                        height: 70,
+                                                        borderRadius: 70,
+                                                        marginRight: 10,
+                                                       }}
+                                                />
+                                                }
+                                                    <View>
+                                                        <Text style={{fontSize:22, fontWeight:'700'}}>{item.name}</Text>
+                                                        <Text style={{fontSize:18, opacity:.7}}>{item.email}</Text>
+                                                    </View>
+                                                </View>
+                                            )}
+                                            keyExtractor={(item) => item.email}
+                                        />
+                                    </View>
                                 } 
                             
                             </View>
@@ -321,6 +352,13 @@ class FbSearchBar extends React.Component{
         textAlign: 'center',
         color: 'gray',
         marginTop:5
+    },
+    searchitemui:{
+       //lignItems:'center',
+        flex:1,
+        paddingTop: 50,
+        //flexDirection:'column',
+        //justifyContent:'center',
     },
     search_item:{
         flexDirection: 'row',

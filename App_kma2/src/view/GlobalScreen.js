@@ -42,10 +42,12 @@ const {Value,timing} = Animated
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
 const GlobalScreen= () => {
+  const info = useSelector((state)=>state.personalInfo)
   return (
     <View style={styles.container}>
-        <FbSearchBar/>
-        <Text>fawe</Text>
+
+        <FbSearchBar statement = {info}/>
+        
         <View style={styles.fake_post}/>
         <View style={styles.fake_post}/>
         <View style={styles.fake_post}/>

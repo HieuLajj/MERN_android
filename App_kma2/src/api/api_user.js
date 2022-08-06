@@ -101,10 +101,28 @@ const updateMember  = async(id,id_member,inputs)=>{
     }
     return true;
   }
+
+  const searchUser  = async(id,nameuser)=>{
+    const config = {
+      headers: {
+        Authorization: `jwt ${id}`
+      },
+     };
+     try {
+      const res = await client.get(`/laihieu/user/searchuser?search=${nameuser}`
+      ,
+      config
+      );
+      return await res.data
+    } catch (error) {
+      console.log(error.message);
+    } 
+  }
 export {
     loginUser,
     registerUser,
     updateMember,
     loginUser2,
-    logoutUser
+    logoutUser,
+    searchUser,
 }

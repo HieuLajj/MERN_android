@@ -1,4 +1,4 @@
-import React, {useEffect,useState,useRef,useContext} from 'react';
+import React, {Component,useEffect,useState,useRef,useContext} from 'react';
 import COLORS from '../components/colors';
 import {useDispatch,useSelector} from 'react-redux';
 import  Animated,{EasingNode} from 'react-native-reanimated'
@@ -215,7 +215,7 @@ class FbSearchBar extends React.Component{
                                             }}
                                             renderItem={({ item,index }) => (
                                                 // <Text>{item.name}</Text>
-                                                <View style={{flexDirection:'row', padding:20, marginBottom:20, borderRadius:12, backgroundColor:'rgba(236, 240, 241,0.8)',
+                                                <TouchableOpacity style={{flexDirection:'row', padding:20, marginBottom:20, borderRadius:12, backgroundColor:'rgba(236, 240, 241,0.8)',
                                                                 shadowColor: "#000",
                                                                 shadowOffset: {
                                                                     width: 0,
@@ -223,7 +223,9 @@ class FbSearchBar extends React.Component{
                                                                 },
                                                                 shadowOpacity: 0.3,
                                                                 shadowRadius:20,
-                                                }}>
+                                                }}
+                                                    onPress={()=>{this.props.tello(item), console.log("dang an")} } 
+                                                >
                                                 { item.avatar!=null ?
                                                 <Image source={{uri:  item.avatar}}
                                                        style={{
@@ -246,7 +248,7 @@ class FbSearchBar extends React.Component{
                                                         <Text style={{fontSize:22, fontWeight:'700'}}>{item.name}</Text>
                                                         <Text style={{fontSize:18, opacity:.7}}>{item.email}</Text>
                                                     </View>
-                                                </View>
+                                                </TouchableOpacity>
                                             )}
                                             keyExtractor={(item) => item.email}
                                         />

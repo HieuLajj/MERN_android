@@ -1,6 +1,6 @@
 
 import React, {useEffect,useContex,useState} from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer,createAppContainer, createStackNavigator} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -48,6 +48,7 @@ import AddButton from './src/components/AddButton';
 import HomeButton from './src/components/HomeButton';
 import TodoButton from './src/components/TodoButton';
 import SettingScreen from './src/view/SettingScreen';
+import Otherpersonal from './src/view/Otherpersonal';
 import Offline from './src/view/Offline';
 import { DrawerContent } from './src/components/DrawerContent';
 const Stack = createNativeStackNavigator();
@@ -57,7 +58,6 @@ import {Provider} from 'react-redux';
 import { store } from './src/redux/store';
 import axios from 'axios'
 import SettingScreen_Account from './src/view/SettingScreen_Account';
-
 
 function MyTabs() {
   return (
@@ -179,6 +179,7 @@ const App= () => {
         <Stack.Screen name="SalonList" component={SalonListDentails}/>
         <Stack.Screen name="NoteList" component={NoteDetails}/>
         <Stack.Screen name="TodayList" component={TodayListDelta}/>
+        <Stack.Screen name="OtherPersonal" component={Otherpersonal}/>
         {/* <Stack.Screen name="HomeTab" component={MyTabs}/> */}
         <Stack.Screen name="MyDraw" component={MyDraws}/>
       </Stack.Navigator>:

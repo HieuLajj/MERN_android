@@ -36,17 +36,24 @@ import {
   Dimensions,
 } from 'react-native';
 import { findFocusedRoute } from '@react-navigation/native';
+import { DebugInstructions } from 'react-native/Libraries/NewAppScreen';
 
 const {Value,timing} = Animated
 
 const width = Dimensions.get('window').width
 const height = Dimensions.get('window').height
-const GlobalScreen= () => {
+const GlobalScreen= ({navigation,route}) => {
+  const tello =(item) =>{
+    navigation.navigate('OtherPersonal',{dataitem: {item}})
+    console.log("-------------------------------------")
+    console.log(item.name)
+    console.log("Hello")
+  }
   const info = useSelector((state)=>state.personalInfo)
   return (
     <View style={styles.container}>
 
-        <FbSearchBar statement = {info}/>
+        <FbSearchBar statement = {info} tello = {tello}/>
         
         <View style={styles.fake_post}/>
         <View style={styles.fake_post}/>

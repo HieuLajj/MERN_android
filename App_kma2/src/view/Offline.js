@@ -37,7 +37,8 @@ const Offline= ({navigation,route}) => {
   const findSpend = async()=>{
     const result = await AsyncStorage.getItem('spends');
     console.log(result);
-    if(result !== null){ 
+    //if(result !== null){ 
+      if(result){ 
      // setSpend(JSON.parse(result))
       setSpend(JSON.parse(result).map((item,index)=>({
         ...item,

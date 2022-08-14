@@ -24,7 +24,6 @@ import {
   StatusBar,
   TextInput,
   StyleSheet,
-  Button,
   Text,
   useColorScheme,
   View,
@@ -130,15 +129,28 @@ class FbSearchBar extends React.Component{
                                     />
                                     {/* <Text>{this.props.statement.token}</Text> */}
                                 </View>
-                                <TouchableHighlight
-                                   activeOpacity={1}
-                                   underlayColor={"#ccd0d5"}
-                                   onPress = {this._onFocus}
-                                   style={styles.search_icon_box} 
-                                >
-                                    <FontAwesome name='search-plus' size={22} color="#000000" ></FontAwesome>
+                                <View style={styles.header_inner2}>
+                                    <TouchableHighlight
+                                    activeOpacity={1}
+                                    underlayColor={"#ccd0d5"}
+                                    onPress = {()=>{
+                                        this.props.openpopup();
+                                    }}
+                                    style={styles.search_icon_box} 
+                                    >
+                                        <FontAwesome name='pencil-square' size={22} color="#000000" ></FontAwesome>
 
-                                </TouchableHighlight>
+                                    </TouchableHighlight>
+                                    <TouchableHighlight
+                                    activeOpacity={1}
+                                    underlayColor={"#ccd0d5"}
+                                     onPress = {this._onFocus}
+                                    style={styles.setting_icon_box} 
+                                    >
+                                        <FontAwesome name='search' size={22} color="#000000" ></FontAwesome>
+
+                                    </TouchableHighlight>
+                                </View>
                                 <Animated.View
                                     style={[styles.input_box,{transform:[{translateX:this._input_box_translate_x}]}]}
                                 >
@@ -280,7 +292,19 @@ class FbSearchBar extends React.Component{
         alignItems: 'center',
         position: 'relative',
     },
+    header_inner2:{       
+        flexDirection:"row",
+    },
     search_icon_box:{
+        width:40,
+        height:40,
+        borderRadius:40,
+        backgroundColor:'#e4e6eb',
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    setting_icon_box:{
         width:40,
         height:40,
         borderRadius:40,

@@ -40,6 +40,7 @@ import SalonListDentails from './src/view/SalonListDetails';
 import TodayListDelta from './src/view/TodayListDelta';
 import NoteDetails from './src/view/NoteDetails';
 import AddScreen from './src/view/AddScreen';
+import {ChakraProvider} from '@chakra-ui/react'
 import TodoScreen from './src/view/TodoScreen';
 import NoteScreen from './src/view/NoteScreen';
 import GlobalScreen from './src/view/GlobalScreen';
@@ -49,6 +50,7 @@ import HomeButton from './src/components/HomeButton';
 import TodoButton from './src/components/TodoButton';
 import SettingScreen from './src/view/SettingScreen';
 import Otherpersonal from './src/view/Otherpersonal';
+import ChatProvider from './src/Context/ChatProvider';
 import Offline from './src/view/Offline';
 import { DrawerContent } from './src/components/DrawerContent';
 const Stack = createNativeStackNavigator();
@@ -164,8 +166,13 @@ const App= () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
   return (
+   // <ChakraProvider>
+   
   <Provider store={store}>
+    {/* <ChakraProvider></ChakraProvider> */}
+     <ChatProvider>
     <NavigationContainer>
+   
      <NoteProvider>
      {netInfo?
      <Stack.Navigator 
@@ -187,7 +194,10 @@ const App= () => {
       }
       </NoteProvider>
     </NavigationContainer>
+    </ChatProvider>
+    
   </Provider>
+  //</ChakraProvider>
   );
 };
 

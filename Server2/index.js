@@ -15,6 +15,7 @@ const User = require('./models/user')
 const userRoute = require("./routes/user_route");
 const expenseRoute = require("./routes/expense_route")
 const chatRoute = require("./routes/chatRoutes")
+const messageRoute = require("./routes/messageRoutes")
 //require('./models/User');
 dotenv.config();
 
@@ -40,6 +41,7 @@ app.get('/',(req,res)=>{
 app.use("/laihieu/user",userRoute);
 app.use("/laihieu/expense",expenseRoute);
 app.use("/laihieu/chat",chatRoute);
+app.use("/laihieu/message",messageRoute);
 
 
 
